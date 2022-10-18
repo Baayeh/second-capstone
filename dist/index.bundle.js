@@ -1,4 +1,4 @@
-(self["webpackChunkleaderboard"] = self["webpackChunkleaderboard"] || []).push([["index"],{
+(self["webpackChunkwebpack_template"] = self["webpackChunkwebpack_template"] || []).push([["index"],{
 
 /***/ "./src/index.js":
 /*!**********************!*\
