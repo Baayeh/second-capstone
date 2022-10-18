@@ -52,3 +52,24 @@ ul li {
 ul li:hover {
   border-bottom: 2px solid grey;
 }
+
+footer {
+  position: fixed !important;
+  color: black;
+  background: white;
+  font-size: 16px;
+  font-weight: 300;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: 100%;
+  text-align: left;
+}
+
+.footer-text {
+  font-size: 12px !important;
+  font-family: roboto, serif;
+  color: black;
+  letter-spacing: 1px;
+  font-weight: 200 !important;
+  margin: 0;
+}
