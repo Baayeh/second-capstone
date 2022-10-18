@@ -1,3 +1,4 @@
 const countryList = document.querySelector('.country-list');
 
-export default countryList;
+// eslint-disable-next-line import/prefer-default-export
+export { countryList };
