@@ -1,3 +1,36 @@
-body {
-  color: aliceblue;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  padding: 2em;
+}
+
+/* Country Card */
+div.card {
+  max-width: 15em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.country-img img {
+  width: 15em;
+}
+
+div.card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7em 0.5em;
+}
+
+div.likes {
+  display: flex;
+  align-items: center;
+}
+
+div.likes a svg {
+  width: 1.5em;
 }
