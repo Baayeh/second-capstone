@@ -6,6 +6,12 @@ body {
   color: grey;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .logo {
   padding: 19px;
   border-radius: 100%;
@@ -39,18 +45,75 @@ nav ul {
   height: inherit;
 }
 
-ul li.active {
+nav ul li.active {
   border-bottom: 2px solid grey;
 }
 
-ul li {
+nav ul li {
   list-style: none;
   margin-right: 12px;
   cursor: pointer;
 }
 
-ul li:hover {
+nav ul li:hover {
   border-bottom: 2px solid grey;
+}
+
+ul.country-list {
+  list-style: none;
+  padding: 2em;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 5em;
+  justify-content: center;
+  margin-bottom: 4em;
+}
+
+/* Country Card */
+div.card {
+  max-width: 15em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+div.country-img img {
+  width: 240px;
+  height: 160px;
+}
+
+div.card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7em 0.5em;
+}
+
+div.likes {
+  display: flex;
+  align-items: center;
+}
+
+div.likes a {
+  color: #000;
+}
+
+div.likes a svg {
+  width: 1.3em;
+}
+
+div.actions {
+  text-align: center;
+  padding: 1em;
+}
+
+div.actions button {
+  padding: 0.5em;
+  width: 100%;
+  font-size: 1em;
+  border: 1px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 footer {
