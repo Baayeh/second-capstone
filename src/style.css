@@ -184,7 +184,7 @@ footer {
   width: 40%;
   height: 100vh;
   margin: auto;
-  /* border: none; */
+  border: none;
 }
 
 .header-container {
@@ -218,9 +218,7 @@ footer {
 .modal-body {
   width: 100%;
   background-color: #fff;
-  /* margin: auto; */
-  margin-top: 0;
-  padding: 3px;
+  margin: auto;
 }
 
 .image-container {
