@@ -65,6 +65,6 @@ const displayCountries = async () => {
 
 // Get the specific country
 const filterCountries = (countryName, sixCountries) => {
- return sixCountries.find((item) => item.name['.common'] === countryName.trim());
-  };
+  return sixCountries.find((item) => item.name['.common'] === countryName.trim());
+};
 document.addEventListener('DOMContentLoaded', displayCountries());
