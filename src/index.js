@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-expressions */
@@ -15,7 +16,8 @@ document.getElementsByClassName('close')[0].onclick = () => {
 };
 
 // Get the specific country
-const filterCountries = (countryName, sixCountries) => sixCountries.find((item) => item.name['.common'] === countryName.trim());
+const filterCountries = (countryName, sixCountries) =>
+  sixCountries.find((item) => item.name.common === countryName.trim());
 
 // Display the list of countries
 const displayCountries = async (newList) => {
@@ -24,7 +26,7 @@ const displayCountries = async (newList) => {
       (country) => `<li class="country-item" id=${country.name.common}>
     <div class="card">
       <div class="country-img">
-        <img src="${country.flags.svg}" alt="Ugandan Flag">
+        <img src="${country.flags.svg}" alt='${country.name.common} flag'>
       </div>
       <div class="card-body">
         <p class="country-name mb-0">${country.name.common}</p>
@@ -64,6 +66,7 @@ const displayCountries = async (newList) => {
   });
 };
 
+// create obj for each country to include likesCount
 const createNewCountryObj = (countries, likes = []) => {
   if (countries.length) {
     const newList = countries.map((country) => {
