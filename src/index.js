@@ -44,18 +44,12 @@ const displayCountries = async (newList) => {
     )
     .join('');
 
-  // const btns = [...document.querySelectorAll('.comment-btn')];
-  // btns.forEach((modalBtn) => {
-  //   modalBtn.addEventListener('click', () => {
-  //     modal.style.display = 'block';
-  //   });
-  // });
   const countryElement = document.querySelectorAll('.country-item');
   countryElement.forEach((element) => {
     element.addEventListener('click', (e) => {
       if (e.target.classList.contains('comment-btn')) {
         const countryName = e.target.getAttribute('id');
-        const result = filterCountries(countryName, sixCountries);
+        const result = filterCountries(countryName, newList);
         modal.style.display = 'block';
         const img = document.querySelector('#country-img');
         const title = document.querySelector('#country-title');
@@ -69,15 +63,6 @@ const displayCountries = async (newList) => {
     });
   });
 };
-
-const getListofLikes = async () => {
-  const result = await getLikes();
-  result.json().then((data) => {
-    console.log(data);
-  });
-};
-
-getListofLikes();
 
 const createNewCountryObj = (countries, likes = []) => {
   if (countries.length) {
