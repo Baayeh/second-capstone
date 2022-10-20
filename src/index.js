@@ -8,6 +8,15 @@ import { getLikes } from './modules/likes.js';
 
 let countries = [];
 
+const modal = document.querySelector('#item-modal');
+
+document.getElementsByClassName('close')[0].onclick = () => {
+  modal.style.display = 'none';
+};
+
+// Get the specific country
+const filterCountries = (countryName, sixCountries) => sixCountries.find((item) => item.name['.common'] === countryName.trim());
+
 // Display the list of countries
 const displayCountries = async (newList) => {
   countryList.innerHTML = newList
@@ -27,12 +36,38 @@ const displayCountries = async (newList) => {
         </div>
       </div>
       <div class="actions">
-        <button type="button">Comments</button>
+        <button type="button" class="comment-btn" id="${country.name.common}
+">Comments</button>
       </div>
     </div>
   </li>`
     )
     .join('');
+
+  // const btns = [...document.querySelectorAll('.comment-btn')];
+  // btns.forEach((modalBtn) => {
+  //   modalBtn.addEventListener('click', () => {
+  //     modal.style.display = 'block';
+  //   });
+  // });
+  const countryElement = document.querySelectorAll('.country-item');
+  countryElement.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      if (e.target.classList.contains('comment-btn')) {
+        const countryName = e.target.getAttribute('id');
+        const result = filterCountries(countryName, sixCountries);
+        modal.style.display = 'block';
+        const img = document.querySelector('#country-img');
+        const title = document.querySelector('#country-title');
+        const population = document.querySelector('#population');
+        const subRegion = document.querySelector('#sub-region');
+        img.setAttribute('src', result.flags.svg);
+        title.innerHTML = result.name.common;
+        population.innerHTML = `Population: ${result.population}`;
+        subRegion.innerHTML = result.subregion;
+      }
+    });
+  });
 };
 
 const getListofLikes = async () => {
