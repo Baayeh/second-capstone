@@ -1,5 +1,5 @@
 import API from './modules/API.js';
-import countryList from './modulesDOMElements.js';
+import countryList from './modules/DOMElements.js';
 import './style.css';
 
 const modal = document.querySelector('#item-modal');
@@ -7,7 +7,6 @@ const modal = document.querySelector('#item-modal');
 document.getElementsByClassName('close')[0].onclick = () => {
   modal.style.display = 'none';
 };
-
 
 // Display the list of countries
 const displayCountries = async () => {
@@ -66,7 +65,6 @@ const displayCountries = async () => {
 
 // Get the specific country
 const filterCountries = (countryName, sixCountries) => {
- return sixCountries.find((item) => item.name['.common'] == countryName.trim());
- };
-
+ return sixCountries.find((item) => item.name['.common'] === countryName.trim());
+  };
 document.addEventListener('DOMContentLoaded', displayCountries());
