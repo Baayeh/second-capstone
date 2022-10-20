@@ -8,6 +8,9 @@ document.getElementsByClassName('close')[0].onclick = () => {
   modal.style.display = 'none';
 };
 
+// Get the specific country
+const filterCountries = (countryName, sixCountries) => sixCountries.find((item) => item.name['.common'] === countryName.trim());
+
 // Display the list of countries
 const displayCountries = async () => {
   const countries = await API.getCountries();
@@ -63,8 +66,4 @@ const displayCountries = async () => {
   });
 };
 
-// Get the specific country
-const filterCountries = (countryName, sixCountries) => {
-  return sixCountries.find((item) => item.name['.common'] === countryName.trim());
-};
 document.addEventListener('DOMContentLoaded', displayCountries());
