@@ -184,7 +184,7 @@ footer {
   width: 40%;
   height: 100vh;
   margin: auto;
-  border: none;
+  /* border: none; */
 }
 
 .header-container {
@@ -218,7 +218,9 @@ footer {
 .modal-body {
   width: 100%;
   background-color: #fff;
-  margin: auto;
+  /* margin: auto; */
+  margin-top: 0;
+  padding: 3px;
 }
 
 .image-container {
@@ -241,32 +243,4 @@ ul.comment-list {
 
 ul.menu li:hover {
   border-bottom: 2px solid grey;
-}
-
-ul.comment-list li:hover {
-  text-decoration: none;
-}
-
-.form-container {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-textarea,
-input[type=text] {
-  margin-bottom: 24px;
-  padding: 10px;
-}
-
-.genres {
-  display: flex;
-  justify-content: space-around;
-  height: 20px;
 }
