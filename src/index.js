@@ -6,8 +6,8 @@
 /* eslint-disable arrow-body-style */
 import getCountries from './modules/countries.js';
 import { countryList } from './modules/DOMElements.js';
-import { getLikes } from './modules/likes.js';
 import { showComments, addComment } from './modules/comments.js';
+import { getLikes, addLike } from './modules/likes.js';
 
 let countries = [];
 
@@ -18,8 +18,8 @@ document.getElementsByClassName('close')[0].onclick = () => {
 };
 
 // Get the specific country
-const filterCountries = (countryName, CountryArray) =>
-  CountryArray.find((item) => item.name.common === countryName.trim());
+const filterCountries = (countryName, countryArr) =>
+  countryArr.find((item) => item.name.common === countryName.trim());
 
 const getCommentList = async (id) => {
   const ulComments = document.querySelector('.comment-list');
@@ -48,33 +48,35 @@ const getCommentList = async (id) => {
 // Display the list of countries
 const displayCountries = async (newList) => {
   countryList.innerHTML = newList
-    .map(
-      (country) => `<li class="country-item" id=${country.name.common}>
-    <div class="card">
-      <div class="country-img">
-        <img src="${country.flags.svg}" alt='${country.name.common} flag'>
-      </div>
-      <div class="card-body">
-        <p class="country-name mb-0">${country.name.common}</p>
-        <div class="likes">
-          <a href="javascript:;" type="button" class='add-like' id=${country.name.common}>
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-          </a>
-          <span class="likes-counter">${country.likesCount}</span>
+    .map((country) => {
+      const countryId = country.name.common.split(' ')[0];
+      return `<li class="country-item" data-id=${country.name.common}>
+        <div class="card">
+          <div class="country-img">
+            <img src="${country.flags.svg}" alt='${country.name.common} flag'>
+          </div>
+          <div class="card-body">
+            <p class="country-name mb-0">${country.name.common}</p>
+            <div class="likes">
+              <a href="javascript:;" type="button" class='add-like' id=${countryId}>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+              </a>
+              <span class="likes-counter">${country.likesCount}</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="comment-btn" id="${country.name.common}
+    ">Comments</button>
+          </div>
         </div>
-      </div>
-      <div class="actions">
-        <button type="button" class="comment-btn" id="${country.name.common}
-">Comments</button>
-      </div>
-    </div>
-  </li>`
-    )
+      </li>`;
+    })
     .join('');
 
   const countryElement = document.querySelectorAll('.country-item');
   countryElement.forEach((element) => {
     element.addEventListener('click', (e) => {
+      // Open Modal dialog
       if (e.target.classList.contains('comment-btn')) {
         const countryName = e.target.getAttribute('id');
         const modal = document.querySelector('#item-modal');
@@ -93,6 +95,18 @@ const displayCountries = async (newList) => {
         // displaying comments  
         getCommentList(result.name.common);
       }
+      // Add Like Counter
+      if (e.target.parentElement.classList.contains('add-like')) {
+        const countryName = e.target.parentElement.getAttribute('id');
+        addLike(countryName).then(() => {
+          const currentCount = Number(
+            e.target.parentElement.nextElementSibling.textContent
+          );
+          e.target.parentElement.nextElementSibling.textContent = String(
+            currentCount + 1
+          );
+        });
+      }
     });
   });
 };
@@ -102,7 +116,7 @@ const createNewCountryObj = (countries, likes = []) => {
   if (countries.length) {
     const newList = countries.map((country) => {
       const likesNo = likes.find((like) => {
-        if (like.item_id === country.name.common) {
+        if (like.item_id === country.name.common.split(' ')[0]) {
           return like;
         }
       });
@@ -148,10 +162,14 @@ const fetchAllCountries = async () => {
       return getLikes();
     })
     .then((response1) => {
-      createNewCountryObj(countries, response1);
-    })
-    .catch(() => {
-      createNewCountryObj(countries, []);
+      response1
+        .json()
+        .then((data) => {
+          createNewCountryObj(countries, data);
+        })
+        .catch(() => {
+          createNewCountryObj(countries, []);
+        });
     });
 };
 
