@@ -4,7 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
+    "watch": "jest --coverage --watchAll",
     "dev": "webpack --mode development",
     "start": "webpack serve --open ",
     "build": "webpack --mode production",
@@ -14,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.19.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -28,6 +30,7 @@
   "dependencies": {
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
+    "jest-environment-jsdom": "^29.2.1",
     "mini-css-extract-plugin": "^2.6.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.74.0",
