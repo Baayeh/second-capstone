@@ -23,17 +23,16 @@ body {
 }
 
 .logo {
-  padding: 19px;
+  padding: 14px 0;
   border-radius: 100%;
   border: 2px solid rgb(198, 192, 185);
   text-align: center;
-  height: 70px;
-  width: 70px;
+  height: 54px;
+  width: 54px;
   cursor: pointer;
 }
 
 header {
-  top: 0;
   padding: 70px 0 100px;
   height: 80px;
   width: 100%;
@@ -144,7 +143,7 @@ div.actions button {
   cursor: pointer;
 }
 
-footer {
+.footer {
   position: fixed !important;
   color: black;
   background: white;
@@ -249,4 +248,15 @@ ul.menu li:hover {
 
 ul.comment-list li:hover {
   text-decoration: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+textarea,
+input[type=text] {
+  margin-bottom: 24px;
+  padding: 10px;
 }
