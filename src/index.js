@@ -21,6 +21,30 @@ document.getElementsByClassName('close')[0].onclick = () => {
 const filterCountries = (countryName, CountryArray) =>
   CountryArray.find((item) => item.name.common === countryName.trim());
 
+const getCommentList = async (id) => {
+  const ulComments = document.querySelector('.comment-list');
+  if (id) {
+    await showComments(id)
+      .then((data) => {
+        if (data.length > 0) {
+          const list = data.map((comment) => {
+          return `<li>
+            <span>${comment.creation_date}</span>
+            <span>${comment.username}</span>
+            <span>${comment.comment}</span>
+            </li>`;
+          });
+          ulComments.innerHTML =  list.join('');
+        } else {
+          throw Error('No comments');
+        }
+      })
+      .catch((err) => {
+        ulComments.innerHTML = err.message;
+      })
+  }
+};
+
 // Display the list of countries
 const displayCountries = async (newList) => {
   countryList.innerHTML = newList
@@ -71,30 +95,6 @@ const displayCountries = async (newList) => {
       }
     });
   });
-};
-
-const getCommentList = async (id) => {
-  const ulComments = document.querySelector('.comment-list');
-  if (id) {
-    await showComments(id)
-      .then((data) => {
-        if (data.length > 0) {
-          const list = data.map((comment) => {
-          return `<li>
-            <span>${comment.creation_date}</span>
-            <span>${comment.username}</span>
-            <span>${comment.comment}</span>
-            </li>`;
-          });
-          ulComments.innerHTML =  list.join('');
-        } else {
-          throw Error('No comments');
-        }
-      })
-      .catch((err) => {
-        ulComments.innerHTML = err.message;
-      })
-  }
 };
 
 // create obj for each country to include likesCount
