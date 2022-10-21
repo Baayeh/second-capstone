@@ -97,6 +97,7 @@ div.card {
   text-align: center;
   width: 60%;
   height: 10%;
+  border: 1px solid gray;
 }
 
 div.country-img img {
