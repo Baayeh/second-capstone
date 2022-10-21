@@ -9,6 +9,7 @@ import { countryList } from './modules/DOMElements.js';
 import { showComments, addComment } from './modules/comments.js';
 import { getLikes, addLike } from './modules/likes.js';
 import NumberOfComments from './modules/commentsCounter.js';
+import countryCount from './modules/ItemsCounter.js';
 
 let countries = [];
 
@@ -82,6 +83,10 @@ const displayCountries = async (newList) => {
       </li>`;
     })
     .join('');
+
+  // Country Counter
+  const countryCounter = document.querySelector('#country-counter');
+  countryCounter.textContent = countryCount(countryList.children);
 
   const countryElement = document.querySelectorAll('.country-item');
   countryElement.forEach((element) => {
