@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "watch": "jest --coverage --watchAll",
     "dev": "webpack --mode development",
     "start": "webpack serve --open ",
