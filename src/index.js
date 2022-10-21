@@ -6,8 +6,9 @@
 /* eslint-disable arrow-body-style */
 import getCountries from './modules/countries.js';
 import { countryList } from './modules/DOMElements.js';
+import { showComments, addComment } from './modules/comments.js';
 import { getLikes, addLike } from './modules/likes.js';
-import showComments from './modules/comments.js';
+import NumberOfComments from './modules/commentsCounter.js';
 import countryCount from './modules/ItemsCounter.js';
 
 let countries = [];
@@ -21,6 +22,39 @@ document.getElementsByClassName('close')[0].onclick = () => {
 // Get the specific country
 const filterCountries = (countryName, countryArr) =>
   countryArr.find((item) => item.name.common === countryName.trim());
+
+// Getting the number of comments
+const getNumOfComments = () => {
+  const CommentsCounter = document.querySelector('.comment-list');
+  const counter = document.querySelector('.commentsCounter');
+  counter.textContent = NumberOfComments(CommentsCounter.children);
+};
+
+const getCommentList = async (id) => {
+  const ulComments = document.querySelector('.comment-list');
+  if (id) {
+    await showComments(id)
+      .then((data) => {
+        if (data.length > 0) {
+          const list = data.map((comment) => {
+            return `<li>
+            <span>${comment.creation_date}</span>
+            <span>${comment.username}</span>
+            <span>${comment.comment}</span>
+            </li>`;
+          });
+          ulComments.innerHTML = list.join('');
+          modal.style.display = 'block';
+          getNumOfComments();
+        } else {
+          throw Error('No comments');
+        }
+      })
+      .catch((err) => {
+        ulComments.innerHTML = err.message;
+      });
+  }
+};
 
 // Display the list of countries
 const displayCountries = async (newList) => {
@@ -60,8 +94,9 @@ const displayCountries = async (newList) => {
       // Open Modal dialog
       if (e.target.classList.contains('comment-btn')) {
         const countryName = e.target.getAttribute('id');
+        const modal = document.querySelector('#item-modal');
+        modal.setAttribute('data-id', countryName);
         const result = filterCountries(countryName, newList);
-        modal.style.display = 'block';
         const img = document.querySelector('#country-img');
         const title = document.querySelector('#country-title');
         const population = document.querySelector('#population');
@@ -72,33 +107,10 @@ const displayCountries = async (newList) => {
         subRegion.innerHTML = result.subregion;
 
         // displaying comments
-        const ulComments = document.querySelector('.comment-list');
-        const getCommentList = async (id) => {
-          if (id === result.name.common) {
-            await showComments(id)
-              .then((data) => {
-                if (data.length > 0) {
-                  const list = data.map((comment) => {
-                    return `<li>
-                      <span>${comment.creation_date}</span>
-                      <span>${comment.username}</span>
-                      <span>${comment.comment}</span>
-                      </li>`;
-                  });
-                  ulComments.innerHTML = list.join('');
-                } else {
-                  throw Error('No comments added!!');
-                }
-              })
-              .catch((err) => {
-                ulComments.innerHTML = err.message;
-              });
-          }
-        };
         getCommentList(result.name.common);
       }
 
-      // Add Like
+      // Add Like Counter
       if (e.target.parentElement.classList.contains('add-like')) {
         const countryName = e.target.parentElement.getAttribute('id');
         addLike(countryName).then(() => {
@@ -132,6 +144,31 @@ const createNewCountryObj = (countries, likes = []) => {
     newList.length && displayCountries(newList);
   }
 };
+
+// add comment
+const createComment = () => {
+  const submitBtn = document.querySelector('#add-comment');
+  submitBtn.addEventListener('click', () => {
+    const id = document.getElementById('item-modal').getAttribute('data-id');
+    const commentID = id.trim();
+    const username = document.getElementById('name').value;
+    const comment = document.getElementById('insights').value;
+    const commentObj = {
+      item_id: commentID,
+      username,
+      comment
+    };
+    if (username !== '' && comment !== '') {
+      addComment(commentObj).then(() => {
+        getCommentList(commentID);
+        document.getElementById('name').value = '';
+        document.getElementById('insights').value = '';
+      });
+    }
+  });
+};
+
+createComment();
 
 const fetchAllCountries = async () => {
   await getCountries()
