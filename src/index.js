@@ -8,6 +8,7 @@ import getCountries from './modules/countries.js';
 import { countryList } from './modules/DOMElements.js';
 import { showComments, addComment } from './modules/comments.js';
 import { getLikes, addLike } from './modules/likes.js';
+import NumberOfComments from './modules/commentsCounter.js';
 
 let countries = [];
 
@@ -20,6 +21,13 @@ document.getElementsByClassName('close')[0].onclick = () => {
 // Get the specific country
 const filterCountries = (countryName, countryArr) =>
   countryArr.find((item) => item.name.common === countryName.trim());
+
+// Getting the number of comments
+const getNumOfComments = () => {
+  const CommentsCounter = document.querySelector('.comment-list');
+  const counter = document.querySelector('.commentsCounter');
+  counter.textContent = NumberOfComments(CommentsCounter.children);
+};
 
 const getCommentList = async (id) => {
   const ulComments = document.querySelector('.comment-list');
@@ -35,6 +43,8 @@ const getCommentList = async (id) => {
             </li>`;
           });
           ulComments.innerHTML = list.join('');
+          modal.style.display = 'block';
+          getNumOfComments();
         } else {
           throw Error('No comments');
         }
@@ -82,7 +92,6 @@ const displayCountries = async (newList) => {
         const modal = document.querySelector('#item-modal');
         modal.setAttribute('data-id', countryName);
         const result = filterCountries(countryName, newList);
-        modal.style.display = 'block';
         const img = document.querySelector('#country-img');
         const title = document.querySelector('#country-title');
         const population = document.querySelector('#population');
@@ -95,6 +104,7 @@ const displayCountries = async (newList) => {
         // displaying comments
         getCommentList(result.name.common);
       }
+
       // Add Like Counter
       if (e.target.parentElement.classList.contains('add-like')) {
         const countryName = e.target.parentElement.getAttribute('id');
