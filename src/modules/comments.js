@@ -11,7 +11,7 @@ const addComment = async (data) => {
   const response = await fetch(`${BASE_URL}apps/IgY08bvfNLdtRYcSagqI/comments`, {
     method: 'POST',
     headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   return response.text();
 };
