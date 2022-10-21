@@ -16,8 +16,8 @@ document.getElementsByClassName('close')[0].onclick = () => {
 };
 
 // Get the specific country
-const filterCountries = (countryName, sixCountries) =>
-  sixCountries.find((item) => item.name.common === countryName.trim());
+const filterCountries = (countryName, countryArr) =>
+  countryArr.find((item) => item.name.common === countryName.trim());
 
 // Display the list of countries
 const displayCountries = async (newList) => {
