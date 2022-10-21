@@ -1,6 +1,9 @@
 import API from './modules/API.js';
 import countryList from './modules/DOMElements.js';
 import './style.css';
+import {
+  showComments
+} from './modules/comments.js'
 
 const modal = document.querySelector('#item-modal');
 
@@ -9,7 +12,7 @@ document.getElementsByClassName('close')[0].onclick = () => {
 };
 
 // Get the specific country
-const filterCountries = (countryName, sixCountries) => sixCountries.find((item) => item.name['.common'] === countryName.trim());
+const filterCountries = (countryName, CountryArray) => CountryArray.find((item) => item.name.common === countryName.trim());
 
 // Display the list of countries
 const displayCountries = async () => {
@@ -40,12 +43,6 @@ const displayCountries = async () => {
     )
     .join('');
 
-  // const btns = [...document.querySelectorAll('.comment-btn')];
-  // btns.forEach((modalBtn) => {
-  //   modalBtn.addEventListener('click', () => {
-  //     modal.style.display = 'block';
-  //   });
-  // });
   const countryElement = document.querySelectorAll('.country-item');
   countryElement.forEach((element) => {
     element.addEventListener('click', (e) => {
@@ -61,9 +58,41 @@ const displayCountries = async () => {
         title.innerHTML = result.name.common;
         population.innerHTML = `Population: ${result.population}`;
         subRegion.innerHTML = result.subregion;
+
+        // displaying comments
+         const ulComments = document.querySelector('.comment-list');
+        const getCommentList = async (id) => {
+          if (id === result.name.common) {
+            await showComments(id)
+              .then((data) => {
+                let list = data ? data.map((comment) => {
+                    return `<li>
+                    <span>${comment.creation_date}</span>
+                    <span>${comment.username}</span>
+                    <span>${comment.comment}</span>
+                    </li>`
+                  }) : '';
+                  ulComments.innerHTML = list.length ? list.join('') : 'No comments'
+              })
+          }
+        }
+
+        getCommentList(result.name.common);
+       
       }
     });
   });
 };
+
+
+
+// Array of comments
+const getCommentList = async () => {
+  await showComments('item1')
+    .then((data) => {
+      return data;
+    })
+}
+
 
 document.addEventListener('DOMContentLoaded', displayCountries());

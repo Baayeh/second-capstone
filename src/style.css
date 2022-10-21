@@ -237,8 +237,15 @@ footer {
 
 ul.comment-list {
   width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 ul.menu li:hover {
   border-bottom: 2px solid grey;
+}
+
+ul.comment-list li:hover {
+  text-decoration: none;
 }
