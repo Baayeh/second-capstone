@@ -28,7 +28,7 @@ const getCommentList = async (id) => {
       .then((data) => {
         if (data.length > 0) {
           const list = data.map((comment) => {
-          return `<li>
+            return `<li>
             <span>${comment.creation_date}</span>
             <span>${comment.username}</span>
             <span>${comment.comment}</span>
@@ -41,7 +41,7 @@ const getCommentList = async (id) => {
       })
       .catch((err) => {
         ulComments.innerHTML = err.message;
-      })
+      });
   }
 };
 
@@ -133,25 +133,25 @@ const createNewCountryObj = (countries, likes = []) => {
 // add comment
 const createComment = () => {
   const submitBtn = document.querySelector('#add-comment');
- submitBtn.addEventListener('click', () => {
-   const id = document.getElementById('item-modal').getAttribute('data-id');
-   const commentID = id.trim();
-   let username = document.getElementById('name').value;
-   let comment = document.getElementById('insights').value;
-   const commentObj = {
-    item_id: commentID,
-    username,
-    comment
-   };
-   if (username !== '' && comment !== '') {
-    addComment(commentObj).then(res => {
-      getCommentList(commentID);
-      document.getElementById('name').value = '';
-      document.getElementById('insights').value = '';
-    })
-   }
- });
-}
+  submitBtn.addEventListener('click', () => {
+    const id = document.getElementById('item-modal').getAttribute('data-id');
+    const commentID = id.trim();
+    const username = document.getElementById('name').value;
+    const comment = document.getElementById('insights').value;
+    const commentObj = {
+      item_id: commentID,
+      username,
+      comment
+    };
+     if (username !== '' && comment !== '') {
+        addComment(commentObj).then(() => {
+        getCommentList(commentID);
+        document.getElementById('name').value = '';
+        document.getElementById('insights').value = '';
+      });
+    };
+  });
+};
 
 createComment();
 
