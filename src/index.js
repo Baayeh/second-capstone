@@ -76,8 +76,8 @@ const displayCountries = async (newList) => {
                     <span>${comment.username}</span>
                     <span>${comment.comment}</span>
                     </li>`;
-                  }) : '';
-              ulComments.innerHTML = list.length ? list.join('') : 'No comments';
+                }) : '';
+                ulComments.innerHTML = list.length ? list.join('') : 'No comments';
               });
           }
         };
