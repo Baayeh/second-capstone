@@ -84,7 +84,6 @@ const displayCountries = async (newList) => {
           }
         };
         getCommentList(result.name.common);
-
       }
       // Add Like Counter
       if (e.target.parentElement.classList.contains('add-like')) {
