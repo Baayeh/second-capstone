@@ -3,9 +3,11 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable comma-dangle */
+/* eslint-disable arrow-body-style */
 import getCountries from './modules/countries.js';
 import { countryList } from './modules/DOMElements.js';
 import { getLikes } from './modules/likes.js';
+import showComments from './modules/comments.js';
 
 let countries = [];
 
@@ -16,8 +18,8 @@ document.getElementsByClassName('close')[0].onclick = () => {
 };
 
 // Get the specific country
-const filterCountries = (countryName, sixCountries) =>
-  sixCountries.find((item) => item.name.common === countryName.trim());
+const filterCountries = (countryName, CountryArray) =>
+  CountryArray.find((item) => item.name.common === countryName.trim());
 
 // Display the list of countries
 const displayCountries = async (newList) => {
@@ -61,6 +63,25 @@ const displayCountries = async (newList) => {
         title.innerHTML = result.name.common;
         population.innerHTML = `Population: ${result.population}`;
         subRegion.innerHTML = result.subregion;
+
+        // displaying comments
+        const ulComments = document.querySelector('.comment-list');
+        const getCommentList = async (id) => {
+          if (id === result.name.common) {
+            await showComments(id)
+              .then((data) => {
+                const list = data ? data.map((comment) => {
+                  return `<li>
+                    <span>${comment.creation_date}</span>
+                    <span>${comment.username}</span>
+                    <span>${comment.comment}</span>
+                    </li>`;
+                }) : '';
+                ulComments.innerHTML = list.length ? list.join('') : 'No comments';
+              });
+          }
+        };
+        getCommentList(result.name.common);
       }
     });
   });
