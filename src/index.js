@@ -34,7 +34,7 @@ const getCommentList = async (id) => {
             <span>${comment.comment}</span>
             </li>`;
           });
-          ulComments.innerHTML =  list.join('');
+          ulComments.innerHTML = list.join('');
         } else {
           throw Error('No comments');
         }
@@ -92,7 +92,7 @@ const displayCountries = async (newList) => {
         population.innerHTML = `Population: ${result.population}`;
         subRegion.innerHTML = result.subregion;
 
-        // displaying comments  
+        // displaying comments
         getCommentList(result.name.common);
       }
       // Add Like Counter
@@ -143,13 +143,13 @@ const createComment = () => {
       username,
       comment
     };
-     if (username !== '' && comment !== '') {
-        addComment(commentObj).then(() => {
+    if (username !== '' && comment !== '') {
+      addComment(commentObj).then(() => {
         getCommentList(commentID);
         document.getElementById('name').value = '';
         document.getElementById('insights').value = '';
       });
-    };
+    }
   });
 };
 
