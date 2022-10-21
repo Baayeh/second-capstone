@@ -8,6 +8,7 @@ import getCountries from './modules/countries.js';
 import { countryList } from './modules/DOMElements.js';
 import { getLikes, addLike } from './modules/likes.js';
 import showComments from './modules/comments.js';
+import countryCount from './modules/ItemsCounter.js';
 
 let countries = [];
 
@@ -49,6 +50,10 @@ const displayCountries = async (newList) => {
     })
     .join('');
 
+  // Country Counter
+  const countryCounter = document.querySelector('#country-counter');
+  countryCounter.textContent = countryCount(countryList.children);
+
   const countryElement = document.querySelectorAll('.country-item');
   countryElement.forEach((element) => {
     element.addEventListener('click', (e) => {
@@ -72,20 +77,28 @@ const displayCountries = async (newList) => {
           if (id === result.name.common) {
             await showComments(id)
               .then((data) => {
-                const list = data ? data.map((comment) => {
-                  return `<li>
-                    <span>${comment.creation_date}</span>
-                    <span>${comment.username}</span>
-                    <span>${comment.comment}</span>
-                    </li>`;
-                }) : '';
-                ulComments.innerHTML = list.length ? list.join('') : 'No comments';
+                if (data.length > 0) {
+                  const list = data.map((comment) => {
+                    return `<li>
+                      <span>${comment.creation_date}</span>
+                      <span>${comment.username}</span>
+                      <span>${comment.comment}</span>
+                      </li>`;
+                  });
+                  ulComments.innerHTML = list.join('');
+                } else {
+                  throw Error('No comments added!!');
+                }
+              })
+              .catch((err) => {
+                ulComments.innerHTML = err.message;
               });
           }
         };
         getCommentList(result.name.common);
       }
-      // Add Like Counter
+
+      // Add Like
       if (e.target.parentElement.classList.contains('add-like')) {
         const countryName = e.target.parentElement.getAttribute('id');
         addLike(countryName).then(() => {
