@@ -1,8 +1,4 @@
-// eslint-disable-next-line operator-linebreak
-const INVVOLVED_URL =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi';
-
-const APP_ID = 'IgY08bvfNLdtRYcSagqI';
+import { INVVOLVED_URL, APP_ID } from './Involvement.js';
 
 // Get all Likes ----->  /apps/:app_id/likes/
 const getLikes = async () => {
@@ -22,6 +18,4 @@ const addLike = async (id) => {
   return response.text();
 };
 
-export {
-  INVVOLVED_URL, APP_ID, getLikes, addLike,
-};
+export { getLikes, addLike };
