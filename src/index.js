@@ -1,9 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable comma-dangle */
-/* eslint-disable arrow-body-style */
 import getCountries from './modules/countries.js';
 import { showComments, addComment } from './modules/comments.js';
 import { getLikes, addLike } from './modules/likes.js';
@@ -14,8 +8,10 @@ import countryList from './modules/DOMElements.js';
 let countries = [];
 
 // Get the specific country
-const filterCountries = (countryName, countryArr) =>
-  countryArr.find((item) => item.name.common === countryName.trim());
+const filterCountries = (countryName, countryArr) => {
+  const result = countryArr.find((item) => item.name.common === countryName.trim());
+  return result;
+};
 
 // Getting the number of comments
 const getNumOfComments = () => {
@@ -34,13 +30,11 @@ const getCommentList = async (id) => {
     await showComments(id)
       .then((data) => {
         if (data.length > 0) {
-          const list = data.map((comment) => {
-            return `<li class="list-group-item d-flex justify-content-between align-items-center">
+          const list = data.map((comment) => `<li class="list-group-item d-flex justify-content-between align-items-center">
               <span>${comment.creation_date}</span>
               <span>${comment.username}</span>
               <span>${comment.comment}</span>
-            </li>`;
-          });
+            </li>`);
           ulComments.innerHTML = list.join('');
           getNumOfComments();
         } else {
@@ -127,10 +121,10 @@ const displayCountries = async (newList) => {
         const countryName = e.target.parentNode.parentNode.getAttribute('id');
         addLike(countryName).then(() => {
           const currentCount = Number(
-            e.target.parentNode.parentNode.nextElementSibling.textContent
+            e.target.parentNode.parentNode.nextElementSibling.textContent,
           );
           e.target.parentNode.parentNode.nextElementSibling.textContent = String(
-            currentCount + 1
+            currentCount + 1,
           );
         });
       }
@@ -195,6 +189,7 @@ const createNewCountryObj = (countries, likes = []) => {
         if (like.item_id === country.name.common.split(' ')[0]) {
           return like;
         }
+        return null;
       });
       return {
         ...country,
@@ -202,7 +197,9 @@ const createNewCountryObj = (countries, likes = []) => {
       };
     });
 
-    newList.length && displayCountries(newList);
+    if (newList.length) {
+      displayCountries(newList);
+    }
   }
 };
 
