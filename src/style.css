@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 18px;
+  color: rgb(17, 16, 32);
+}
+
+.logo {
+  padding: 14px 0;
+  border-radius: 100%;
+  border: 2px solid rgb(198, 192, 185);
+  text-align: center;
+  height: 54px;
+  width: 54px;
+  cursor: pointer;
+}
+
+a.navbar-brand svg {
+  width: 100px;
+  color: #000;
+}
+
+a.navbar-brand p {
+  font-size: 1.5em;
+  letter-spacing: 2px;
+}
+
+div.card {
+  transition: 1s;
+}
+
+div.card:hover {
+  cursor: pointer;
+  filter: drop-shadow(1px 5px 10px rgb(148, 148, 148));
+}
+
+div.card-img {
+  width: 100%;
+  height: 190px;
+  background-position: center;
+  background-size: cover;
+}
+
+div.card-body h4 {
+  font-weight: 700;
+}
+
+span.p-lead {
+  font-weight: 600;
+}
+
+div.likes {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+div.likes a {
+  color: #000;
+}
+
+div.likes a:hover {
+  color: crimson;
+}
+
+div.likes a svg {
+  width: 1.3em;
+  transition: 0.2s;
+}
+
+div.likes a:hover svg {
+  fill: crimson;
+}
+
+/**************
+  Modal Styling
+**************/
+
+div.modal-dialog {
+  min-width: 50em;
+}
+
+div.modal-content {
+  background-color: #e9ecef;
+}
+
+.modal-body img {
+  text-align: center;
+  width: 75%;
+  height: 20%;
+}
+
+ul.list-group {
+  max-width: 30em;
+  margin: 0 auto;
+}
+
+form {
+  max-width: 25em;
+  margin: 0 auto;
+}
+
+form button {
+  margin-bottom: 24px;
+  padding: 10px;
+}
+
+div.actions button {
+  padding: 0.5em;
+  width: 100%;
+  font-size: 1em;
+  border: 1px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.footer {
+  position: fixed !important;
+  color: black;
+  background: white;
+  font-size: 16px;
+  font-weight: 300;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: 100%;
+  text-align: left;
+}
+
+.footer-text {
+  font-size: 12px !important;
+  font-family: roboto, serif;
+  color: black;
+  letter-spacing: 1px;
+  font-weight: 200 !important;
+  margin: 0;
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul.menu li:hover {
+  border-bottom: 2px solid grey;
+}
+
+ul.comment-list li:hover {
+  text-decoration: none;
+}
+
+textarea,
+input[type=text] {
+  margin-bottom: 24px;
+  padding: 10px;
+}
