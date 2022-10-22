@@ -3,6 +3,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -11,12 +12,6 @@ body {
   font-weight: normal;
   line-height: 18px;
   color: rgb(17, 16, 32);
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
 }
 
 .logo {
@@ -77,13 +72,13 @@ div.likes a:hover {
   color: crimson;
 }
 
-div.likes a:hover svg {
-  fill: crimson;
-}
-
 div.likes a svg {
   width: 1.3em;
   transition: 0.2s;
+}
+
+div.likes a:hover svg {
+  fill: crimson;
 }
 
 /**************
@@ -96,16 +91,7 @@ div.modal-dialog {
 
 div.modal-content {
   background-color: #e9ecef;
-  /* position: relative; */
 }
-
-/* .btn-close {
-  position: absolute;
-  right: 2em;
-  top: 2.6em;
-  font-size: 1.5em;
-  cursor: pointer;
-} */
 
 .modal-body img {
   text-align: center;
@@ -178,11 +164,6 @@ ul.menu li:hover {
 
 ul.comment-list li:hover {
   text-decoration: none;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
 }
 
 textarea,
