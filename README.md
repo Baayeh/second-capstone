@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Second Capstone - Country App
- This is a country app
+# Second Capstone - Globe App
+ A website that displays the list of countries from the RESTFUL COuntries API
 
 > We created this project using ES6 concepts. 
 > We connected to the [Country API](https://restcountries.com/#api-endpoints-v3-all)
@@ -11,10 +11,11 @@
 
 - HTML, CSS and Javascript
 - Bundled with Webpack
+- Tests made using Jest
 
 
 ## Live Demo
-> No Live Demo yet
+> [Globe App](https://baayeh.github.io/second-capstone/)
 
 ## Video Presentation
  - [Presentation](https://drive.google.com/file/d/1NfbE05LsXLPM41Cex78RC8vXJiJhPKhA/view?usp=sharing)
